@@ -1,5 +1,5 @@
-from djitellopy import Tello
 import cv2
+from djitellopy import Tello
 
 
 def initializeTello():
@@ -18,5 +18,19 @@ def initializeTello():
 def telloGetFrame(myDrone, w= 360,h=240):
     myFrame = myDrone.get_frame_read()
     myFrame = myFrame.frame
-    img = cv2.resize(myframe,(w,h))
+    img = cv2.resize(myFrame,(w,h))
     return img 
+
+w,h = 360,240
+
+myDrone = initializeTello()
+
+while True:
+    ## step 1
+    Img = telloGetFrame(myDrone,w,h)
+
+    cv2.imshow('image',Img)
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+         myDrone.land()
+         break
+                   
