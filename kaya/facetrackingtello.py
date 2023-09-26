@@ -19,12 +19,11 @@ def telloGetFrame(myDrone, w= 360,h=240):
     myFrame = myDrone.get_frame_read()
     myFrame = myFrame.frame
     img = cv2.resize(myFrame,(w,h))
-    r, g, b = im_rgb.split()
-    im_rgb = Image.merge('RGB', (b, g, r))
-    myDrone = initializeTello()
     return img 
 
 w,h = 360,240
+
+myDrone = initializeTello()
 
 while True:
     ## step 1
