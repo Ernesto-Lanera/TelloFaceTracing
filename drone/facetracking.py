@@ -18,9 +18,12 @@ drone.streamon()
 while True:
     # Read frame from video stream
     frame = drone.get_frame_read().frame
+    
+    # Swap R and B channels
+    frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
     # Show the frame in the created window
-    cv2.imshow("Drone", frame)
+    cv2.imshow("Drone", frame_rgb)
 
     # Wait for the user to press 'q' to exit the loop
     if cv2.waitKey(1) & 0xFF == ord('q'):
