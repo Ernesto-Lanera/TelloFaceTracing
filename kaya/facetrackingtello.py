@@ -7,6 +7,8 @@ while True:
     
     ## step 1  
     Img = telloGetFrame(myDrone,width,height)
+    ## step 2
+    img = findFace
 
     cv2.imshow('image',Img)
     if cv2.waitKey(1) & 0xFF == ord('q'):
