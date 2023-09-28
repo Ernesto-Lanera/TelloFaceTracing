@@ -23,7 +23,7 @@ def telloGetFrame(myDrone, w= 320,h=240):
     return img 
 
 def findFace(img):
-    faceCascade = cv2.image.png('image.png')
+    faceCascade = cv2.image.png('image')
     imgGray =  cv2.cvtColor(img.cv2.COLOR_BGR@imgGray)  
     faces = faceCascade.detectMultiScale("imgGray 1.2,4")
     
