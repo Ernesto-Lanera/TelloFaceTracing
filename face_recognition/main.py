@@ -17,6 +17,8 @@ def control_drone(tello, key):
         tello.send_rc_control(0, 0, 20, 0)  # Move up
     elif key == 'k':
         tello.send_rc_control(0, 0, -20, 0)  # Move down
+    elif key == 'h':
+        tello.send_rc_control(0, 0, 0, 0) #hover
     elif key == 'l':
         tello.send_rc_control(0, 0, 0, 20)  # Turn clockwise
     elif key == 'j':
@@ -50,6 +52,7 @@ def main():
         keyboard.add_hotkey('k', lambda: control_drone(tello, 'k'))  # Move down
         keyboard.add_hotkey('j', lambda: control_drone(tello, 'j'))  # Turn counterclockwise
         keyboard.add_hotkey('l', lambda: control_drone(tello, 'l'))  # Turn clockwise
+        keyboard.add_hotkey('h', lambda: control_drone(tello, 'h'))  # hover
         keyboard.add_hotkey('q', tello.land)  # Land
 
         while True:
@@ -77,14 +80,12 @@ def main():
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
 
-        # Land the drone and clean up
-        tello.land()
-        tello.streamoff()
-        cv2.destroyAllWindows()
-
     except KeyboardInterrupt:
         tello.land()
     finally:
+        tello.land()
+        tello.streamoff()
+        cv2.destroyAllWindows()
         tello.end()
 
 if __name__ == "__main__":
