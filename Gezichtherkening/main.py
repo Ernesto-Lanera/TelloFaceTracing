@@ -62,7 +62,7 @@ def bestuur_drone(tello, toets):
     elif toets == 'q':
         tello.land()  # Landen
 
-def hoofd():
+def main():
     try:
         # Opstijgen
         tello.takeoff()
@@ -81,7 +81,8 @@ def hoofd():
 
         # Wacht op verbinding
         verbinding, client_adres = sock_dashboard.accept()
-
+        
+        #wanneer de loop true is dan gaat hij pas de code gebruiken
         while True:
 
             try:
@@ -123,4 +124,4 @@ def hoofd():
         tello.end()
 
 if __name__ == "__main__":
-    hoofd()
+    main()
