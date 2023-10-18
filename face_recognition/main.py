@@ -22,11 +22,7 @@ tello.streamon()
 # Load pre-trained face detection model
 face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
 
-# Create a folder to save captured images
-if not os.path.exists("captured_images"):
-    os.mkdir("captured_images")
-
-# Tello's IP and h
+# Tello's IP and port
 tello_address = ('192.168.10.1', 8889)
 
 # Create a UDP socket for sending commands
@@ -43,9 +39,9 @@ def send_command(command):
         return response.decode('utf-8')
     except Exception as e:
         return str(e)
-
+    
+# Define the drone control commands based on keyboard inputs
 def control_drone(tello, key):
-    # Define the drone control commands based on keyboard inputs
     if key == 'w':
         tello.send_rc_control(0, 20, 0, 0)  # Move forward
     elif key == 's':
@@ -102,9 +98,6 @@ def main():
                         cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 0, 255), 2)  # Red color for smaller faces
                     else:
                         cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)  # Green color for other faces
-
-                    roi_gray = gray[y:y + h, x:x + w]
-                    roi_color = frame[y:y + h, x:x + w]
                     
                 print(frame.shape)
                     
